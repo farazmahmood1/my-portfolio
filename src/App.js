@@ -1,23 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
-
+import HomePage from './components/HomePage';
+import About from './components/About';
+import Buttons from './components/Buttons';
 function App() {
+
+  (function () {
+    [...document.querySelectorAll(".control")].forEach(button => {
+      button.addEventListener("click", function () {
+        document.querySelector(".active-btn").classList.remove("active-btn");
+        this.classList.add("active-btn");
+        document.querySelector(".active").classList.remove("active");
+        document.getElementById(button.dataset.id).classList.add("active");
+      })
+    });
+    document.querySelector(".theme-btn").addEventListener("click", () => {
+      document.body.classList.toggle("light-mode");
+    })
+  })();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='main-content'>
+      <HomePage />
+      <About />
+      <Buttons />
     </div>
   );
 }
